@@ -3,6 +3,7 @@ import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Tab1 from "./pages/Tab1";
 import AddStudent from "./pages/AddStudent";
+import EditStudent from "./pages/EditStudent";
 
 /* Ionic CSS imports (default) */
 import "@ionic/react/css/core.css";
@@ -32,6 +33,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/add-student">
           <AddStudent />
+        </Route>
+        <Route exact path="/edit-student/:studentID">
+          <EditStudent />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
