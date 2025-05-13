@@ -8,12 +8,13 @@ import {
   IonItem,
   IonLabel,
   IonSpinner,
+  IonFab,
+  IonFabButton,
+  IonIcon,
 } from "@ionic/react";
-
-import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { add } from "ionicons/icons";
-
 import useStudents from "../custom_hooks/useStudents";
+import { Student } from "../custom_hooks/useStudents";
 
 const Tab1: React.FC = () => {
   const { students, loading, error } = useStudents();
@@ -33,12 +34,16 @@ const Tab1: React.FC = () => {
       </IonFab>
 
       <IonContent fullscreen>
-        {loading && <IonSpinner name="dots" />}
-        {error && <IonItem>{error}</IonItem>}
+        {loading && <IonSpinner name="dots" style={{ margin: "1rem" }} />}
+        {error && (
+          <IonItem color="danger">
+            <IonLabel>{error}</IonLabel>
+          </IonItem>
+        )}
 
         <IonList>
-          {students.map((student, index) => (
-            <IonItem key={index}>
+          {students.map((student: Student) => (
+            <IonItem key={student.studentID}>
               <IonLabel>
                 {student.studentID} - {student.firstName} {student.lastName}
               </IonLabel>

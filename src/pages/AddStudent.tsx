@@ -13,12 +13,13 @@ import {
 import { useState } from "react";
 import { useHistory } from "react-router";
 import useCreateStudent from "../custom_hooks/useCreateStudent";
+import { Student } from "../custom_hooks/useStudents"; // ✅ Assuming interface is exported from here
 
 const AddStudent: React.FC = () => {
   const { postStudent } = useCreateStudent();
   const history = useHistory();
 
-  const [newStudent, setNewStudent] = useState({
+  const [newStudent, setNewStudent] = useState<Student>({
     studentID: 0,
     firstName: "",
     lastName: "",
@@ -33,10 +34,10 @@ const AddStudent: React.FC = () => {
     const value = e.detail.value;
 
     const numericFields = ["studentID", "moduleNo1", "moduleNo2", "courseID"];
-    setNewStudent({
-      ...newStudent,
+    setNewStudent((prev) => ({
+      ...prev,
       [name]: numericFields.includes(name) ? parseInt(value) || 0 : value,
-    });
+    }));
   };
 
   const handleSubmit = async () => {
@@ -49,6 +50,7 @@ const AddStudent: React.FC = () => {
       console.log("Redirecting...");
       history.push("/students");
     } else {
+      console.error("Post failed. Result:", result);
       alert("Failed to add student. Check input or PHP server.");
     }
   };
