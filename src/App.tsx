@@ -1,42 +1,21 @@
-import { Redirect, Route } from "react-router-dom";
-import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
+import { IonApp, IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import Tab1 from "./pages/Tab1";
-import AddStudent from "./pages/AddStudent";
-import EditStudent from "./pages/EditStudent";
-
-/* Ionic CSS imports (default) */
-import "@ionic/react/css/core.css";
-import "@ionic/react/css/normalize.css";
-import "@ionic/react/css/structure.css";
-import "@ionic/react/css/typography.css";
-import "@ionic/react/css/padding.css";
-import "@ionic/react/css/float-elements.css";
-import "@ionic/react/css/text-alignment.css";
-import "@ionic/react/css/text-transformation.css";
-import "@ionic/react/css/flex-utils.css";
-import "@ionic/react/css/display.css";
-
-import "./theme/variables.css";
-
-setupIonicReact();
+import { Redirect, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import ModulesPage from "./pages/ModulesPage";
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route exact path="/students">
-          <Tab1 />
+        <Route exact path="/" component={Home} />
+
+        <Route exact path="/modules">
+          <ModulesPage />
+                 
         </Route>
-        <Route exact path="/">
-          <Redirect to="/students" />
-        </Route>
-        <Route exact path="/add-student">
-          <AddStudent />
-        </Route>
-        <Route exact path="/edit-student/:studentID">
-          <EditStudent />
-        </Route>
+        <Route exact path="/" component={Home} />
+        <Redirect to="/" />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
